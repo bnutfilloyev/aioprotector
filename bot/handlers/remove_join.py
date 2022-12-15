@@ -1,12 +1,17 @@
-from aiogram import Router, F
-from aiogram.types import Message, ContentType
+from aiogram import F, Router
+from aiogram.types import ContentType, Message
 
 router = Router()
+router.message.filter(F.chat.type == "group")
 
 
-@router.message(~F.content_type(ContentType.NEW_CHAT_MEMBERS, ContentType.LEFT_CHAT_MEMBER))
+@router.message(
+    ~F.content_type(ContentType.NEW_CHAT_MEMBERS, ContentType.LEFT_CHAT_MEMBER)
+)
 async def remove_join(message: Message):
     await message.delete()
-    await message.answer(
-        "<a href='tg://user?id={user_id}'>{user_name}</a> sizni ko'rib turganimizdan xursandmiz.".format(
-            user_id=message.from_user.id, user_name=message.from_user.full_name))
+    if message.content_type == ContentType.NEW_CHAT_MEMBERS:
+        text = "Assalomu alaykum, {}! aiogram[uz] kommunityga xush kelibsiz!".format(
+            message.from_user.full_name
+        )
+        await message.answer(text)
