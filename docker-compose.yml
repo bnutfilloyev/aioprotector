@@ -1,8 +1,15 @@
 version: '3.8'
 
 services:
-  db:
-    image: postgres:13-alpine
-    restart: "unless-stopped"
-    environment:
-      POSTGRES_PASSWORD: password123!
+  bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: 'unless-stopped'
+
+
+#  db:
+#    image: postgres:13-alpine
+#    restart: "unless-stopped"
+#    environment:
+#      POSTGRES_PASSWORD: password123!
