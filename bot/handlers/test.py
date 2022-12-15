@@ -6,4 +6,4 @@ router = Router()
 
 @router.message()
 async def test(message: Message):
-    await message.answer("test")
+    await message.answer(f"Hello, !")
