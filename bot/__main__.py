@@ -2,9 +2,9 @@ import asyncio
 import logging
 
 from aiogram import Bot, Dispatcher
-from bot.handlers import setup_routers
 
 from bot.config import config
+from bot.handlers import setup_routers
 
 
 async def main():
@@ -13,7 +13,7 @@ async def main():
         format="%(filename)s [LINE:%(lineno)d] #%(levelname)-8s [%(asctime)s]  %(message)s",
     )
 
-    bot = Bot(token=config.bot_token.get_secret_value())
+    bot = Bot(token=config.bot_token.get_secret_value(), parse_mode="HTML")
     dp = Dispatcher()
     router = setup_routers()
     dp.include_router(router)
